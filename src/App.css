@@ -1,38 +1,79 @@
-.App {
-  text-align: center;
+@import 'https://fonts.googleapis.com/css?family=Hanken+Grotesk:wght@0,300;0,400;0,700;1,300;1,400;1,700';
+
+html {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  font-family: 'Hanken Grotesk';
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 100vh;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  background-color: var(--bg-color);
 }
 
-.App-link {
-  color: #61dafb;
+:root {
+  --bg-color: #2D2727;
+  --accent-color: #413543;
+  --text-color: #8F43EE;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.square {
+  padding: 0;
+  border-radius: 20px;
+  margin: .5rem;
+  width: 100px;
+  height: 100px;
+  font-size: 72px;
+  font-weight: bold;
+  border: none;
+  color: var(--text-color);
+  background-color: var(--accent-color);
+}
+
+.row-board {
+  display: flex;
+}
+
+.media {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: .5rem;
+}
+
+.media p {
+  font-size: 24px;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.media button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 50px;
+  height: 50px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.media img {
+  aspect-ratio: 1 / 1;
+  width: 25px;
+}
+
+.winner {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 1rem;
 }

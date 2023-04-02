@@ -1,6 +1,6 @@
 import './App.css';
 import restart from './reset.png';
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 
 function checkWinner(squares){
   const winPatterns = [
@@ -13,12 +13,21 @@ function checkWinner(squares){
     [0,4,8],
     [2,4,6]
   ]
-
-  for(let i = 0; i < winPatterns.length; i++){
-    const [a,b,c] = winPatterns[i];
-    if(squares[a] === squares[b] && squares[a] === squares[c])
-      return squares[a];   
-  }
+  let winMethod = null;
+  // for(let i = 0; i < winPatterns.length; i++){
+  //   const [a,b,c] = winPatterns[i];
+  //   if(squares[a] === squares[b] && squares[a] === squares[c]){
+  //     console.log(squares[a]);
+  //     return squares[a];   
+  //   }
+  // }
+  winPatterns.forEach((pattern) => {
+    if(squares[pattern[0]] && squares[pattern[0]] === squares[pattern[1]] && 
+      squares[pattern[0]] === squares[pattern[2]]){
+        winMethod=squares[pattern[0]];
+    }
+  });
+  return winMethod;
 }
 
 const Square = ({value, onClick}) => {
@@ -33,10 +42,12 @@ const Board = () => {
   const [sign, setSign] = useState(Array(9).fill(null));
   const [isX, setX] = useState(true);
 
-  const squareClick = (i) => {    
+  const squareClick = (i) => {  
+    console.log(checkWinner(sign));  
     if(checkWinner(sign) != sign[i]){
-      return;
+      console.log("win");
     }
+    checkWinner(sign);
     if(sign[i] === null){
         if(isX)
         sign[i] = 'X';
@@ -52,12 +63,11 @@ const Board = () => {
     setX(true);
     setSign(Array(9).fill(null));
   }
-
-  let playerTurn;
-  if(isX)
-    playerTurn = 'X';
-  else
-    playerTurn = 'O';
+  const [playerTurn, setPlayerTurn] = useState('X');
+  useEffect(()=>{
+    if(isX) setPlayerTurn('X');
+    else setPlayerTurn('O');
+	}, [isX])
 
   const winner = checkWinner(sign);
   let showWinner;
